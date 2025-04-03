@@ -4,8 +4,8 @@
   "description": "autenticación_users",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node server.js"
+},
   "author": "Cristhoper Pincay",
   "license": "ISC",
   "dependencies": {
