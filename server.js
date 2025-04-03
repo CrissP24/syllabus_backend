@@ -4,7 +4,8 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: ["https://syllabus-frontend.vercel.app", "http://localhost:8081"], // Agrega la URL de tu frontend en producción y en local
+  credentials: true, // Si manejas cookies o sesiones
 };
 
 app.use(cors(corsOptions));
