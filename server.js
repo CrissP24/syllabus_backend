@@ -67,7 +67,9 @@ app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
 
+// Rutas
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/userManagement.routes")(app);
 require("./app/routes/docente.routes")(app);
+require("./app/routes/dynamicData.routes")(app);
