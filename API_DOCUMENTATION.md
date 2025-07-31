@@ -11,7 +11,51 @@ All endpoints require authentication via JWT token in the header:
 x-access-token: <your-jwt-token>
 ```
 
-## Endpoints
+## Authentication Endpoints
+
+### Login (Sign In)
+**POST** `/signin`
+
+**Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "username": "admin",
+  "email": "admin@example.com",
+  "roles": ["ROLE_ADMIN", "ROLE_USER"],
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### Register (Sign Up)
+**POST** `/signup`
+
+**Body:**
+```json
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "password123",
+  "roles": ["user", "docente"]
+}
+```
+
+**Response:**
+```json
+{
+  "message": "User was registered successfully!"
+}
+```
+
+## User Management Endpoints
 
 ### 1. Get All Users
 **GET** `/users`
@@ -199,14 +243,19 @@ The system supports the following roles:
 ### 404 Not Found
 ```json
 {
-  "message": "User not found"
+  "message": "User Not found."
 }
 ```
 
 ### 400 Bad Request
 ```json
 {
-  "message": "Username or email already exists"
+  "message": "Failed! Username is already in use!"
+}
+```
+```json
+{
+  "message": "Failed! Email is already in use!"
 }
 ```
 
@@ -232,7 +281,8 @@ The frontend component `UserManagement.js` is already configured to work with th
 ## Security Notes
 
 1. All endpoints require authentication via JWT token
-2. Only users with admin role can access these endpoints
+2. Only users with admin role can access user management endpoints
 3. Passwords are hashed using bcrypt before storage
 4. User passwords are never returned in API responses
-5. Role validation is performed on both frontend and backend 
+5. Role validation is performed on both frontend and backend
+6. Login now uses email instead of username for authentication 
