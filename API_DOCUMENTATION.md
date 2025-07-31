@@ -285,4 +285,37 @@ The frontend component `UserManagement.js` is already configured to work with th
 3. Passwords are hashed using bcrypt before storage
 4. User passwords are never returned in API responses
 5. Role validation is performed on both frontend and backend
-6. Login now uses email instead of username for authentication 
+6. Login now uses email instead of username for authentication
+
+## Troubleshooting
+
+### Username Undefined Error
+
+If you encounter the error "WHERE parameter 'username' has invalid 'undefined' value", it means there are users in the database without a username. This can happen when:
+
+1. Users were created without a username field
+2. Database migration issues
+3. Data import problems
+
+**Solution:**
+
+1. Run the username fix script:
+   ```bash
+   node fixUsernames.js
+   ```
+
+2. This script will:
+   - Find users with null or undefined username
+   - Generate a username from their email (part before @)
+   - Update the database
+
+3. The backend now includes fallback logic:
+   - If username is null/undefined, it uses email as username
+   - Frontend displays email if username is not available
+
+**Manual Fix:**
+```sql
+UPDATE users 
+SET username = SUBSTRING_INDEX(email, '@', 1) 
+WHERE username IS NULL OR username = '';
+``` 

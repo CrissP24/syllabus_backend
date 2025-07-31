@@ -78,7 +78,7 @@ exports.signin = (req, res) => {
         }
         res.status(200).send({
           id: user.id,
-          username: user.username,
+          username: user.username || user.email, // Fallback to email if username is null
           email: user.email,
           roles: authorities,
           accessToken: token

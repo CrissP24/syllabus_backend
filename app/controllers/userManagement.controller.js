@@ -22,6 +22,8 @@ exports.getAllUsers = async (req, res) => {
     const formattedUsers = users.map(user => {
       const userData = user.get({ plain: true });
       userData.roles = userData.roles.map(role => role.name);
+      // Asegurar que username tenga un valor
+      userData.username = userData.username || userData.email;
       return userData;
     });
 
@@ -51,6 +53,8 @@ exports.getUserById = async (req, res) => {
 
     const userData = user.get({ plain: true });
     userData.roles = userData.roles.map(role => role.name);
+    // Asegurar que username tenga un valor
+    userData.username = userData.username || userData.email;
 
     res.status(200).json(userData);
   } catch (err) {
