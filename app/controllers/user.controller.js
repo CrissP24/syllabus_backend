@@ -41,3 +41,13 @@ exports.decanoBoard = (req, res) => {
 exports.comisionSilabosBoard = (req, res) => {
   res.status(200).send("Contenido de comisión de silabos.");
 };
+
+
+
+/// 
+//docente para  syllabus y plan analitico
+//comision academica solo dar observaciones 
+//direccion academica aprueba los syllabus, Calendario 
+
+
+//decanato
